@@ -37,28 +37,56 @@ int main() {
 //    deque.print();
 
     CircularDeque deque(15);
+     CircularDeque deque1(4);
 
-    for (int i=1;i<7;i++){
-        deque.pushBack(i);
-        deque.pushBack(i*5);
-        deque.popFront();
+  std::cout<<"L_deque="<<deque.getLength()<<std::endl;
+deque.print();
+
+    for (int i=1;i<8;i++){
+    deque.pushFront(i);
+      deque.pushFront(7*i);
+     // deque.print();
+
+   //  deque.popBack();
     }
 
-    deque.print();
-    std::cout<<"L="<<deque.getLength()<<std::endl;
 
+    for (int i=1;i<8;i++){
+    deque.popFront();
+      deque.popFront();
+     // deque.print();
+
+   //  deque.popBack();
+    }
+
+
+    std::cout<<"L_deque="<<deque.getLength()<<std::endl;
+deque.print();
     CircularDeque d(deque);
 
-    deque.print();
-    std::cout<<"L="<<deque.getLength()<<std::endl;
 
-    d.print();
-    std::cout<<"L="<<d.getLength()<<std::endl;
+    std::cout<<"L_deque="<<deque.getLength()<<std::endl;
+  deque.print();
 
-    d=d;
+    std::cout<<"L_d="<<d.getLength()<<std::endl;
+  d.print();
+  std::cout<<std::endl<<"-------- ====  -------------"<<std::endl;
+    d=deque;
+    deque1=d;
 
-    d.print();
-    std::cout<<"L="<<d.getLength()<<std::endl;
+  //  deque1.popFront();
+
+    std::cout<<"L_deque="<<deque.getLength()<<std::endl;
+   deque.print();
+
+      std::cout<<"L_deque1="<<deque1.getLength()<<std::endl;
+   deque1.print() ;
+
+    std::cout<<"L_d="<<d.getLength()<<std::endl;
+   d.print();
+
+
+
 
     return 0;
 }

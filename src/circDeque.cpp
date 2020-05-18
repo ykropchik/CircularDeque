@@ -95,23 +95,25 @@ unsigned int CircularDeque::getLength() {
 }
 
 void CircularDeque::print() {
-    if (rightBorder < leftBorder) {
-        for (unsigned int i = leftBorder; i <= maxSize; ++i) {
-            std::cout << data[i] << " ";
-        }
-
-        for (unsigned int j = 0; j <= rightBorder; ++j) {
-            std::cout << data[j] << " ";
-        }
+    if ((leftBorder - rightBorder == 1) || (rightBorder - leftBorder == maxSize)) {
+        std::cout << std::endl;
     } else {
-        for (unsigned int i = leftBorder; i <= rightBorder; ++i) {
-            std::cout << data[i] << " ";
+        if (rightBorder < leftBorder) {
+            for (unsigned int i = leftBorder; i <= maxSize; ++i) {
+                std::cout << data[i] << " ";
+            }
+
+            for (unsigned int j = 0; j <= rightBorder; ++j) {
+                std::cout << data[j] << " ";
+            }
+        } else {
+            for (unsigned int i = leftBorder; i <= rightBorder; ++i) {
+                std::cout << data[i] << " ";
+            }
         }
+
+        std::cout << std::endl;
     }
-
-
-    std::cout << std::endl;
-
 }
 
 void CircularDeque::printAll() {
@@ -127,18 +129,23 @@ CircularDeque& CircularDeque::operator =(const CircularDeque &deque){
     }
     bool added = true;
 
-    if (deque.leftBorder > deque.rightBorder) {
+    this->leftBorder = 0;
+    this->rightBorder = this->maxSize;
 
-        for (unsigned int i = deque.leftBorder; (i < deque.maxSize + 1) && (added); ++i) {
-            added = this->pushBack(deque.data[i]);
-        }
+    if ((deque.leftBorder - deque.rightBorder != 1) && (deque.rightBorder - deque.leftBorder != deque.maxSize)) {
+        if (deque.leftBorder > deque.rightBorder) {
 
-        for (unsigned int i = 0; (i < deque.rightBorder + 1) && (added); ++i) {
-            added = this->pushBack(deque.data[i]);
-        }
-    } else {
-        for (unsigned int i = deque.leftBorder; (i < deque.rightBorder + 1) && (added); ++i) {
-            added = this->pushBack(deque.data[i]);
+            for (unsigned int i = deque.leftBorder; (i <= deque.maxSize) && (added); ++i) {
+                added = this->pushBack(deque.data[i]);
+            }
+
+            for (unsigned int i = 0; (i <= deque.rightBorder) && (added); ++i) {
+                added = this->pushBack(deque.data[i]);
+            }
+        } else {
+            for (unsigned int i = deque.leftBorder; (i <= deque.rightBorder) && (added); ++i) {
+                added = this->pushBack(deque.data[i]);
+            }
         }
     }
 
